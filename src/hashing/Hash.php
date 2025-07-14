@@ -103,30 +103,27 @@ class Hash implements Hasher
     /**
      * Create an instance of the Bcrypt hash Driver.
      *
-     * @return \Illuminate\Hashing\BcryptHasher
+     * @return BcryptHasher
      */
-    public function createBcryptDriver()
-    {
+    public function createBcryptDriver(): BcryptHasher {
         return new BcryptHasher(config('plugin.yzh52521.hashing.app.bcrypt') ?? []);
     }
 
     /**
      * Create an instance of the Argon2i hash Driver.
      *
-     * @return \Illuminate\Hashing\ArgonHasher
+     * @return ArgonHasher
      */
-    public function createArgonDriver()
-    {
+    public function createArgonDriver(): ArgonHasher {
         return new ArgonHasher(config('plugin.yzh52521.hashing.app.argon') ?? []);
     }
 
     /**
      * Create an instance of the Argon2id hash Driver.
      *
-     * @return \Illuminate\Hashing\Argon2IdHasher
+     * @return Argon2IdHasher
      */
-    public function createArgon2idDriver()
-    {
+    public function createArgon2idDriver(): Argon2IdHasher {
         return new Argon2IdHasher(config('plugin.yzh52521.hashing.app.argon') ?? []);
     }
 
@@ -136,8 +133,7 @@ class Hash implements Hasher
      * @param string $hashedValue
      * @return array
      */
-    public function info($hashedValue)
-    {
+    public function info($hashedValue): array {
         return $this->driver()->info($hashedValue);
     }
 
@@ -148,8 +144,7 @@ class Hash implements Hasher
      * @param array $options
      * @return string
      */
-    public function make($value, array $options = [])
-    {
+    public function make($value, array $options = []): string {
         return $this->driver()->make($value, $options);
     }
 
@@ -161,8 +156,7 @@ class Hash implements Hasher
      * @param array $options
      * @return bool
      */
-    public function check($value, $hashedValue, array $options = [])
-    {
+    public function check($value, $hashedValue, array $options = []): bool {
         return $this->driver()->check($value, $hashedValue, $options);
     }
 
@@ -173,8 +167,7 @@ class Hash implements Hasher
      * @param array $options
      * @return bool
      */
-    public function needsRehash($hashedValue, array $options = [])
-    {
+    public function needsRehash($hashedValue, array $options = []): bool {
         return $this->driver()->needsRehash($hashedValue, $options);
     }
 
@@ -185,8 +178,7 @@ class Hash implements Hasher
      * @param \Closure $callback
      * @return $this
      */
-    public function extend($driver, \Closure $callback)
-    {
+    public function extend($driver, \Closure $callback): Hash {
         $this->customCreators[$driver] = $callback;
 
         return $this;
